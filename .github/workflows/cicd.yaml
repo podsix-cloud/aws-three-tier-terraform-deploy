@@ -55,8 +55,8 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
+       - name: Terraform Apply
+         run: terraform apply -auto-approve
 
       # # Uncomment these if you want to deploy kubectl/argocd
       # - name: install kubectl
