@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "pod-6-project"
+    bucket = "podsix-s3-bucket"
     key    = "mypodsix/prodution/terraform.tfstate"
     region = "eu-north-1"
   }
