@@ -68,7 +68,7 @@ resource "helm_release" "cert_manager" {
     version    = "1.14.5"
     namespace  = "cert-manager"
     create_namespace = false
-    timeout = 900
+    timeout = 600
     wait = true
     wait_for_jobs = true
     
@@ -95,7 +95,7 @@ resource "helm_release" "argocd" {
     namespace        = "argocd"
     create_namespace = false
     wait = true
-    timeout = 900
+    timeout = 600
     values = [file("${path.module}/argocd-values.yaml")]
     depends_on = [ helm_release.nginx_ingress, helm_release.cert_manager, kubernetes_namespace.argocd ]
 }

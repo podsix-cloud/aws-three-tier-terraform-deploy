@@ -8,7 +8,7 @@ variable "vpc_cidrblock" {
 variable "environment" {
   description = "Environment name (e.g., dev, staging, prod)"
   type        = string
-  default     = "staging"
+  default     = "production"
   
 }
 
@@ -52,7 +52,7 @@ variable "min_size" {
 variable "instance_types" {
   description = "Instance types for the EKS node group"
   type        = list(string)
-  default     = ["t2.micro"]    
+  default     = ["t3.medium"]    
 } 
 
 variable "capacity_type" {
@@ -63,7 +63,7 @@ variable "capacity_type" {
 variable "eks_version" {
   description = "EKS cluster version"
   type        = string
-  default     = "1.33"
+  default     = "1.34"
 }
 variable "ami_type" {
   description = "AMI type for the EKS node group"
@@ -94,7 +94,7 @@ variable "domain-name" {
 variable "db_instance_class" {
   description = "Instance class for the RDS database"
   type        = string
-  default     = "db.t3.micro" 
+  default     = "db.t3.medium" 
 }
 
 variable "db_allocated_storage" {
@@ -143,5 +143,5 @@ variable "repository_name" {
 variable "email" {
   description = "Email address for notifications and certificates"
   type        = string
-  default     = "support@digitalwitchng.online"
+  default     = "okoro.christianpeace@gmail.com"
 }
