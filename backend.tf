@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "podsix-s3-bucket"
+    bucket = "podsix-s3-bucket01"
     key    = "mypodsix/prodution/terraform.tfstate"
-    region = "eu-north-1"
+    region = "us-east-1"
   }
 }
