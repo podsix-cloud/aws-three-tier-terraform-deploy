@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: docker-runner:latest
+    image: ghcr.io/actions/runner:latest
     container_name: github-runner
     restart: unless-stopped
     env_file:
