@@ -1,4 +1,4 @@
-name: Deploy to aws with Terraform and kubectl
+name: Deploy to aws with Terraform 
 
 on:
   push:
