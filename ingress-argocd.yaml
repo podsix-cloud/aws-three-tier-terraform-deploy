@@ -1,12 +1,41 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: argocd-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: "external-nginx"
+#     cert-manager.io/cluster-issuer: http-01-production
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+#     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+# spec:
+#   ingressClassName: external-nginx
+#   tls:
+#   - hosts:
+#     - argocd.mypodsix.online
+#     secretName: argocd-mypodsix-online
+#   rules:
+#   - host: argocd.mypodsix.online
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: argocd-server
+#             port:
+#               number: 80
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-ingress
+  namespace: argocd
   annotations:
     kubernetes.io/ingress.class: "external-nginx"
     cert-manager.io/cluster-issuer: http-01-production
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
   ingressClassName: external-nginx
   tls:

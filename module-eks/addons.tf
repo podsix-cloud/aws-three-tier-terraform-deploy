@@ -18,21 +18,21 @@ data "aws_eks_cluster_auth" "eks" {
 }
 
 # Create namespaces
-resource "kubernetes_namespace" "ingress" {
+resource "kubernetes_namespace_v1" "ingress" {
   provider = kubernetes.eks
   metadata {
     name = "ingress-nginx"
   }
 }
 
-resource "kubernetes_namespace" "cert_manager" {
+resource "kubernetes_namespace_v1" "cert_manager" {
   provider = kubernetes.eks
   metadata {
     name = "cert-manager"
   }
 }
 
-resource "kubernetes_namespace" "argocd" {
+resource "kubernetes_namespace_v1" "argocd" {
   provider = kubernetes.eks
   metadata {
     name = "argocd"
@@ -50,7 +50,7 @@ resource "helm_release" "nginx_ingress" {
     timeout = 600 
 
     values = [file("${path.module}/nginx-ingress-values.yaml")]
-    depends_on = [ aws_eks_node_group.eks_node_group, kubernetes_namespace.ingress ]
+    depends_on = [ aws_eks_node_group.eks_node_group, kubernetes_namespace_v1.ingress ]
 }
 
 data "aws_lb" "nginx_ingress" {
@@ -83,7 +83,7 @@ resource "helm_release" "cert_manager" {
         }
     ]
     
-    depends_on = [ helm_release.nginx_ingress, kubernetes_namespace.cert_manager ]
+    depends_on = [ helm_release.nginx_ingress, kubernetes_namespace_v1.cert_manager ]
 }
 #==================================================
 
@@ -97,5 +97,5 @@ resource "helm_release" "argocd" {
     wait = true
     timeout = 600
     values = [file("${path.module}/argocd-values.yaml")]
-    depends_on = [ helm_release.nginx_ingress, helm_release.cert_manager, kubernetes_namespace.argocd ]
+    depends_on = [ helm_release.nginx_ingress, helm_release.cert_manager, kubernetes_namespace_v1.argocd ]
 }
